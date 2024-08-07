@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
 import { capitalize } from "@/lib/capitalize";
 import Link from "next/link";
-import {savePost} from '../../../../lib/post'
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { savePost } from "@/lib/post";
 
 export default function Post({params}:{
     params:{
@@ -12,14 +12,26 @@ export default function Post({params}:{
     }
 }) {
     const router = useRouter()
-    async function handleSubmit(e:any){
-        e.preventDefault()
-        await savePost(e.target.value)
-    }
+    // async function savePost(data:FormData) {
+    //     'use server'
+
+    //     const title = data.get('title')
+    //     const description = data.get('description')
+
+    //     const res = await fetch(`http://localhost:3000/api/post`,{
+    //         method:'POST',
+    //         body:JSON.stringify({title,description}),
+    //         cache:'no-cache'
+    //     })
+    //     if(res.ok){
+    //         const posts = await res.json()
+    //         console.log(posts)
+    //     }
+    // }
     return (
         <div>
             <h1>This is {capitalize(params.username)} Post Page</h1>
-            <form className="flex flex-col w-[200px] m-2" action={handleSubmit}>
+            <form className="flex flex-col w-[200px] m-2" action={savePost}>
                 <input type="text" name="title" id="title" className="border" />
                 <textarea name="description" id="description" className="border" />
                 <button className="bg-blue-500 py-2 px-1 rounded text-white">Post</button>

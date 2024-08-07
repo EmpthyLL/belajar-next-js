@@ -4,7 +4,7 @@ import { capitalize } from "@/lib/capitalize";
 // import { useRouter } from "next/navigation";
 
 async function getData(postid:string) {
-    const post = await fetch(`http://localhost:3001//api/post/${postid}`,{
+    const post = await fetch(`http://localhost:3000//api/post/${postid}`,{
         method:'GET',
     })
     return post.json()

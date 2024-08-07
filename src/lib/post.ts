@@ -1,10 +1,8 @@
 export async function savePost(data:FormData) {
-    'use server'
-
     const title = data.get('title')
     const description = data.get('description')
 
-    const res = await fetch(`http://localhost:3001/api/post`,{
+    const res = await fetch(`http://localhost:3000/api/post`,{
         method:'POST',
         body:JSON.stringify({title,description}),
         cache:'no-cache'
