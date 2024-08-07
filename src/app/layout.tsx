@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Gupter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import { Toaster } from "sonner";
+import { AppWrapper } from "@/context";
 
 const inter = Gupter({weight:'400', subsets: ["latin"] });
 
@@ -21,7 +23,10 @@ export default function RootLayout({
         <Header name="Howard" age='23' job='haaa'>Saku</Header>
         <Header name="Jerry" age='19' job='yaaa'>Rata</Header>
         <h1>Dukung Legalisasi Ganja!</h1>
+        <AppWrapper>
         {children}
+        </AppWrapper>
+        <Toaster richColors  />
       </body>
     </html>
   );

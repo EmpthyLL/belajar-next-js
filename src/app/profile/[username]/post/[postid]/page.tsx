@@ -4,7 +4,7 @@ import { capitalize } from "@/lib/capitalize";
 // import { useRouter } from "next/navigation";
 
 async function getData(postid:string) {
-    const post = await fetch(`https://belajar-next-js-kcc9.vercel.app/api/post/${postid}`,{
+    const post = await fetch(`http://localhost:3001//api/post/${postid}`,{
         method:'GET',
     })
     return post.json()
@@ -12,24 +12,29 @@ async function getData(postid:string) {
 
 export async function generateMetadata({params}:any) {
     const {post} = await getData(params.postid)
-    console.log(post)
     return {
-        title: post.title,
-        description: post.description
+        title: post?post.title:'judul aja',
+        description: post?post.description:'deskripsi aja'
     }
 }
 
-export default function PostID({params}:{
+export default async function PostID({params,searchParams}:{
     params:{
         username:string,
         postid:string
-    }
+    },
+    searchParams:any
 }) {
     // const params = useParams()
     // const router = useRouter()
+    const {post} = await getData(params.postid)
+    console.log(searchParams)
     return (
         <div>
-            <h1>This is Post {params.postid} On {capitalize(params.username)} Profile</h1>
+            <h2>This is Post {params.postid} On {capitalize(params.username)} Profile</h2>
+            <p>comment : {searchParams.comment}</p>
+            <p>title : {post?post.title:'judul aja'}</p>
+            <p>description : {post?post.description:'deskripsi aja'}</p>
             {/* <p className="hover:cursor-pointer" onClick={()=>router.back()}>Back</p> */}
         </div>
     );
